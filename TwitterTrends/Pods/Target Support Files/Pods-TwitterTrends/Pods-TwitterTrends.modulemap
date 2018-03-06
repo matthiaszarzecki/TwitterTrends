@@ -1,0 +1,6 @@
+framework module Pods_TwitterTrends {
+  umbrella header "Pods-TwitterTrends-umbrella.h"
+
+  export *
+  module * { export * }
+}

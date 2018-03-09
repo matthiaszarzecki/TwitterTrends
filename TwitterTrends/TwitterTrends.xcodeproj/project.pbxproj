@@ -82,11 +82,11 @@
 			children = (
 				CC03F5292045947D0048B716 /* AppDelegate.swift */,
 				CC03F52B2045947D0048B716 /* ViewController.swift */,
+				CC3405AB204991E700F2B07A /* RESTClient.swift */,
 				CC03F52D2045947D0048B716 /* Main.storyboard */,
 				CC03F5302045947D0048B716 /* Assets.xcassets */,
 				CC03F5322045947D0048B716 /* LaunchScreen.storyboard */,
 				CC03F5352045947D0048B716 /* Info.plist */,
-				CC3405AB204991E700F2B07A /* RESTClient.swift */,
 			);
 			path = TwitterTrends;
 			sourceTree = "<group>";

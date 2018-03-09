@@ -13,6 +13,8 @@ class ViewController: UITableViewController {
 
     let twitterConsumerKey = "IcGVWgJhPZxDhchayq9TtT7kh"
     let twitterSecretKey = "kQdHgDg6DowQRgt0Q3ocfZCBuSYT0gIkLq46fTFkomW9dNJBr7"
+    let baseURL = "https://api.twitter.com/"
+    
     var bearerToken: String = ""
     
     var objects = [String]()
@@ -21,22 +23,24 @@ class ViewController: UITableViewController {
         super.viewDidLoad()
 
         loadTokenAndAddDataToView()
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+        
+        //Load token
+        //Get Trends
+        //Add trends to view
     }
     
     // MARK: Internal Functions
     
-    func loadTokenAndAddDataToView() {
+    private func loadTokenAndAddDataToView() {
         //create login-hash
         let loginString = String(format: "%@:%@", twitterConsumerKey, twitterSecretKey)
         let loginData = loginString.data(using: String.Encoding.utf8)!
         let base64LoginString = loginData.base64EncodedString()
         
         //create request
-        let url = URL(string: "https://api.twitter.com/oauth2/token?grant_type=client_credentials")!
+        let path = "oauth2/token"
+        let params = "grant_type=client_credentials"
+        let url = getURL(path: path, params: params)
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
@@ -57,9 +61,11 @@ class ViewController: UITableViewController {
         }).resume()
     }
     
-    func loadTrends() {
+    private func loadTrends() {
         //load trends with authentication included
-        let url = URL(string: "https://api.twitter.com/1.1/trends/place.json?id=638242")!
+        let path = "1.1/trends/place.json"
+        let params = "id=638242"
+        let url = getURL(path: path, params: params)
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("Bearer \(bearerToken)", forHTTPHeaderField: "Authorization")
@@ -74,7 +80,7 @@ class ViewController: UITableViewController {
         }).resume()
     }
     
-    func addTrendsToTableView(data: JSON) {
+    private func addTrendsToTableView(data: JSON) {
         let trends = data[0]["trends"]
         print("Trends: \(trends)")
         for currentItem in data[0]["trends"].arrayValue {
@@ -84,6 +90,11 @@ class ViewController: UITableViewController {
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
+    }
+    
+    private func getURL(path: String, params: String) -> URL {
+        let urlString = "\(baseURL)\(path)?\(params)"
+        return URL(string: urlString)!
     }
     
     // MARK: Table View Functions
@@ -101,4 +112,5 @@ class ViewController: UITableViewController {
         cell.textLabel?.text = objects[indexPath.row]
         return cell
     }
+    
 }

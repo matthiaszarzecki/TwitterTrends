@@ -16,19 +16,23 @@ struct RESTClient {
         self.urlSession = urlSession
     }
     
-    func getRequest(url: String, completion: @escaping (Data) -> Void) {
-        
+    func getRequest(withURL url: String, completion: @escaping (Data) -> Void) {
         guard let url = URL(string: url) else {
             return print("not a valid url string")
         }
         
         urlSession.dataTask(with: url) { data, response, error in
-            if let data = data,
-                let httpResponse = response as? HTTPURLResponse,
-                httpResponse.statusCode == 200 {
+            if let data = data, let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
                 completion(data)
             }
-            }.resume()
+        }.resume()
+    }
+    
+    func getRequest(withRequest request: URLRequest, completion: @escaping (Data) -> Void) {
+        urlSession.dataTask(with: request) { data, response, error in
+            if let data = data, let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
+                completion(data)
+            }
+        }.resume()
     }
 }
-

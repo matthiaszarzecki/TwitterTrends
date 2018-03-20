@@ -17,7 +17,7 @@ class ViewController: UITableViewController {
     
     var bearerToken: String = ""
     
-    var objects = [String]()
+    var trends = [Trend]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,10 +81,16 @@ class ViewController: UITableViewController {
     }
     
     private func addTrendsToTableView(data: JSON) {
-        let trends = data[0]["trends"]
+        let trendData = data[0]["trends"].arrayValue
         print("Trends: \(trends)")
-        for currentItem in data[0]["trends"].arrayValue {
-            self.objects.append(currentItem["name"].stringValue)
+        for trend in trendData {
+            let newTrend = Trend(name: trend["name"].stringValue,
+                                 query: trend["query"].stringValue,
+                                 tweetVolume: trend["tweet_volume"].intValue,
+                                 promotedContent: trend["promoted_content"].boolValue,
+                                 url: trend["url"].stringValue)
+            
+            self.trends.append(newTrend)
         }
 
         DispatchQueue.main.async {
@@ -104,13 +110,12 @@ class ViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return objects.count
+        return trends.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath)
-        cell.textLabel?.text = objects[indexPath.row]
+        cell.textLabel?.text = trends[indexPath.row].name
         return cell
     }
-    
 }

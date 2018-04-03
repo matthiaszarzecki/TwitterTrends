@@ -19,60 +19,30 @@ class ViewController: UITableViewController {
     
     var trends = [Trend]()
     
+    let restClient = RESTClient(urlSession: URLSession.shared)
+    
+    private let repository = TrendRepository(restClient: RESTClient(urlSession: URLSession.shared))
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         loadTokenAndAddDataToView()
-        
-        //Load token
-        //Get Trends
-        //Add trends to view
     }
     
     // MARK: Internal Functions
     
     private func loadTokenAndAddDataToView() {
-        //create login-hash
-        let loginString = String(format: "%@:%@", twitterConsumerKey, twitterSecretKey)
-        let loginData = loginString.data(using: String.Encoding.utf8)!
-        let base64LoginString = loginData.base64EncodedString()
-        
-        //create request
-        let path = "oauth2/token"
-        let params = "grant_type=client_credentials"
-        let url = getURL(path: path, params: params)
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
-        request.setValue("application/x-www-form-urlencoded;charset=UTF-8", forHTTPHeaderField: "Content-Type")
-        request.setValue("29", forHTTPHeaderField: "Content-Length")
-        request.setValue("gzip", forHTTPHeaderField: "Accept-Encoding")
-        
-        //send off request for bearerToken
-        URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
-            if let data = data, let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
-                do {
-                    let results = try JSON(data: data)
-                    self.bearerToken = results["access_token"].stringValue;
-                    print("Results: \(results)")
-                    self.loadTrends()
-                } catch {}
-            }
-        }).resume()
+        restClient.getRequest(withRequest: getAuthenticationRequest()) { (data) in
+            do {
+                let results = try JSON(data: data)
+                self.bearerToken = results["access_token"].stringValue;
+                self.loadTrends()
+            } catch {}
+        }
     }
     
     private func loadTrends() {
-        let restClient = RESTClient(urlSession: URLSession.shared)
-
-        //load trends with authentication included
-        let path = "1.1/trends/place.json"
-        let params = "id=638242"
-        let url = getURL(path: path, params: params)
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        request.setValue("Bearer \(bearerToken)", forHTTPHeaderField: "Authorization")
-        
-        restClient.getRequest(withRequest: request) { (data) in
+        restClient.getRequest(withRequest: getTrendsRequest()) { (data) in
             do {
                 let results = try JSON(data: data)
                 self.addTrendsToTableView(data: results)
@@ -101,6 +71,33 @@ class ViewController: UITableViewController {
     private func getURL(path: String, params: String) -> URL {
         let urlString = "\(baseURL)\(path)?\(params)"
         return URL(string: urlString)!
+    }
+    
+    private func getTrendsRequest() -> URLRequest {
+        let path = "1.1/trends/place.json"
+        let params = "id=638242"
+        let url = getURL(path: path, params: params)
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("Bearer \(bearerToken)", forHTTPHeaderField: "Authorization")
+        return request
+    }
+    
+    private func getAuthenticationRequest() -> URLRequest {
+        let loginString = String(format: "%@:%@", twitterConsumerKey, twitterSecretKey)
+        let loginData = loginString.data(using: String.Encoding.utf8)!
+        let base64LoginString = loginData.base64EncodedString()
+        
+        let path = "oauth2/token"
+        let params = "grant_type=client_credentials"
+        let url = getURL(path: path, params: params)
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
+        request.setValue("application/x-www-form-urlencoded;charset=UTF-8", forHTTPHeaderField: "Content-Type")
+        request.setValue("29", forHTTPHeaderField: "Content-Length")
+        request.setValue("gzip", forHTTPHeaderField: "Accept-Encoding")
+        return request
     }
     
     // MARK: Table View Functions

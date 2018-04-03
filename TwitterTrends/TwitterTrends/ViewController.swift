@@ -14,18 +14,15 @@ class ViewController: UITableViewController {
     let twitterConsumerKey = "IcGVWgJhPZxDhchayq9TtT7kh"
     let twitterSecretKey = "kQdHgDg6DowQRgt0Q3ocfZCBuSYT0gIkLq46fTFkomW9dNJBr7"
     let baseURL = "https://api.twitter.com/"
-    
     var bearerToken: String = ""
-    
     var trends = [Trend]()
     
-    let restClient = RESTClient(urlSession: URLSession.shared)
-    
-    private let repository = TrendRepository(restClient: RESTClient(urlSession: URLSession.shared))
+    private let restClient = RESTClient(urlSession: URLSession.shared)
+    private var repository = TrendRepository(restClient: RESTClient(urlSession: URLSession.shared))
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         loadTokenAndAddDataToView()
     }
     
@@ -42,27 +39,11 @@ class ViewController: UITableViewController {
     }
     
     private func loadTrends() {
-        restClient.getRequest(withRequest: getTrendsRequest()) { (data) in
-            do {
-                let results = try JSON(data: data)
-                self.addTrendsToTableView(data: results)
-            } catch {}
-        }
-    }
-    
-    private func addTrendsToTableView(data: JSON) {
-        let trendData = data[0]["trends"].arrayValue
-        print("Trends: \(trends)")
-        for trend in trendData {
-            let newTrend = Trend(name: trend["name"].stringValue,
-                                 query: trend["query"].stringValue,
-                                 tweetVolume: trend["tweet_volume"].intValue,
-                                 promotedContent: trend["promoted_content"].boolValue,
-                                 url: trend["url"].stringValue)
-            
-            self.trends.append(newTrend)
-        }
-
+        self.repository.getTrends(bearerToken: self.bearerToken, completion: { (data) in
+            self.trends = data
+            self.tableView.reloadData()
+        })
+        
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
@@ -71,16 +52,6 @@ class ViewController: UITableViewController {
     private func getURL(path: String, params: String) -> URL {
         let urlString = "\(baseURL)\(path)?\(params)"
         return URL(string: urlString)!
-    }
-    
-    private func getTrendsRequest() -> URLRequest {
-        let path = "1.1/trends/place.json"
-        let params = "id=638242"
-        let url = getURL(path: path, params: params)
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        request.setValue("Bearer \(bearerToken)", forHTTPHeaderField: "Authorization")
-        return request
     }
     
     private func getAuthenticationRequest() -> URLRequest {

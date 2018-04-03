@@ -110,11 +110,7 @@ class ViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            return "Berlin Trends"
-        } else {
-            return "Section \(section)"
-        }
+        return section == 0 ? "Berlin Trends" : "Section \(section)"
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

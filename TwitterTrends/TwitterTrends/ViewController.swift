@@ -62,6 +62,8 @@ class ViewController: UITableViewController {
     }
     
     private func loadTrends() {
+        let restClient = RESTClient(urlSession: URLSession.shared)
+
         //load trends with authentication included
         let path = "1.1/trends/place.json"
         let params = "id=638242"
@@ -70,14 +72,12 @@ class ViewController: UITableViewController {
         request.httpMethod = "GET"
         request.setValue("Bearer \(bearerToken)", forHTTPHeaderField: "Authorization")
         
-        URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
-            if let data = data, let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
-                do {
-                    let results = try JSON(data: data)
-                    self.addTrendsToTableView(data: results)
-                } catch {}
-            }
-        }).resume()
+        restClient.getRequest(withRequest: request) { (data) in
+            do {
+                let results = try JSON(data: data)
+                self.addTrendsToTableView(data: results)
+            } catch {}
+        }
     }
     
     private func addTrendsToTableView(data: JSON) {

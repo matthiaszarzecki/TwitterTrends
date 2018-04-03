@@ -109,6 +109,14 @@ class ViewController: UITableViewController {
         return 1
     }
     
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "Berlin Trends"
+        } else {
+            return "Section \(section)"
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return trends.count
     }

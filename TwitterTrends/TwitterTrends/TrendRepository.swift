@@ -50,15 +50,10 @@ class TrendRepository {
     private func getTrendsRequest(bearerToken: String) -> URLRequest {
         let path = "1.1/trends/place.json"
         let params = "id=638242"
-        let url = getURL(path: path, params: params)
+        let url = Utilities.getURL(path: path, params: params)
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("Bearer \(bearerToken)", forHTTPHeaderField: "Authorization")
         return request
-    }
-    
-    private func getURL(path: String, params: String) -> URL {
-        let urlString = "\(baseURL)\(path)?\(params)"
-        return URL(string: urlString)!
     }
 }

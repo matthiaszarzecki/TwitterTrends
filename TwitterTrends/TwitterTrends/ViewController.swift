@@ -13,7 +13,6 @@ class ViewController: UITableViewController {
 
     let twitterConsumerKey = "IcGVWgJhPZxDhchayq9TtT7kh"
     let twitterSecretKey = "kQdHgDg6DowQRgt0Q3ocfZCBuSYT0gIkLq46fTFkomW9dNJBr7"
-    let baseURL = "https://api.twitter.com/"
     var bearerToken: String = ""
     var trends = [Trend]()
     
@@ -30,12 +29,18 @@ class ViewController: UITableViewController {
     
     private func loadTokenAndAddDataToView() {
         restClient.getRequest(withRequest: getAuthenticationRequest()) { (data) in
-            do {
-                let results = try JSON(data: data)
-                self.bearerToken = results["access_token"].stringValue;
+            self.bearerToken = self.getTokenFromData(data: data)
+            if self.bearerToken != "" {
                 self.loadTrends()
-            } catch {}
+            }
         }
+    }
+    private func getTokenFromData(data: Data) -> String {
+        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+        if let jsonDict = json as? [String : Any] {
+            return jsonDict["access_token"] as? String ?? ""
+        }
+        return ""
     }
     
     private func loadTrends() {
@@ -47,11 +52,6 @@ class ViewController: UITableViewController {
         })
     }
     
-    private func getURL(path: String, params: String) -> URL {
-        let urlString = "\(baseURL)\(path)?\(params)"
-        return URL(string: urlString)!
-    }
-    
     private func getAuthenticationRequest() -> URLRequest {
         let loginString = String(format: "%@:%@", twitterConsumerKey, twitterSecretKey)
         let loginData = loginString.data(using: String.Encoding.utf8)!
@@ -59,7 +59,7 @@ class ViewController: UITableViewController {
         
         let path = "oauth2/token"
         let params = "grant_type=client_credentials"
-        let url = getURL(path: path, params: params)
+        let url = Utilities.getURL(path: path, params: params)
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")

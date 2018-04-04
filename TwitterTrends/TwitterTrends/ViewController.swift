@@ -41,12 +41,10 @@ class ViewController: UITableViewController {
     private func loadTrends() {
         self.repository.getTrends(bearerToken: self.bearerToken, completion: { (data) in
             self.trends = data
-            self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         })
-        
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
     }
     
     private func getURL(path: String, params: String) -> URL {

@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SwiftyJSON
 
 class TrendRepository {
     let restClient: RESTClient
@@ -20,29 +19,34 @@ class TrendRepository {
     
     public func getTrends(bearerToken: String, completion: @escaping ([Trend]) -> Void) {
         restClient.getRequest(withRequest: getTrendsRequest(bearerToken: bearerToken)) { (data) in
-            do {
-                let results = try JSON(data: data)
-                self.trends = self.getTrendsFromJSON(data: results)
-                completion(self.trends)
-            } catch {}
+            self.trends = self.getTrendsFromData(data: data)
+            completion(self.trends)
         }
     }
     
-    private func getTrendsFromJSON(data: JSON) -> [Trend] {
-        let trendData = data[0]["trends"].arrayValue
+    private func getTrendsFromData(data: Data) -> [Trend] {
         var newTrends = [Trend]()
-        for trend in trendData {
-            let newTrend = Trend(name: trend["name"].stringValue,
-                                 query: trend["query"].stringValue,
-                                 tweetVolume: trend["tweet_volume"].intValue,
-                                 promotedContent: trend["promoted_content"].boolValue,
-                                 url: trend["url"].stringValue)
-            
-            newTrends.append(newTrend)
+        
+        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+        if let dataArray = json as? [Any] {
+            if let dataDictionary = dataArray[0] as? [String : Any] {
+                if let trends = dataDictionary["trends"] as? [Any] {
+                    for trend in trends {
+                        if let currentTrend = trend as? [String : Any] {
+                            let newTrend = Trend(name: currentTrend["name"] as? String ?? "",
+                                                 query: currentTrend["query"] as? String ?? "",
+                                                 tweetVolume: currentTrend["tweet_volume"] as? Int ?? 0,
+                                                 promotedContent: currentTrend["promoted_content"] as? Bool ?? false,
+                                                 url: currentTrend["url"] as? String ?? "")
+                            newTrends.append(newTrend)
+                        }
+                    }
+                }
+            }
         }
         return newTrends
     }
-
+    
     private func getTrendsRequest(bearerToken: String) -> URLRequest {
         let path = "1.1/trends/place.json"
         let params = "id=638242"

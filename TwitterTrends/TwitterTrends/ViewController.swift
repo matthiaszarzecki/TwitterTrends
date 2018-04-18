@@ -9,63 +9,39 @@
 import UIKit
 
 class ViewController: UITableViewController {
-
-    let twitterConsumerKey = "IcGVWgJhPZxDhchayq9TtT7kh"
-    let twitterSecretKey = "kQdHgDg6DowQRgt0Q3ocfZCBuSYT0gIkLq46fTFkomW9dNJBr7"
-    var bearerToken: String = ""
+    private var bearerToken: String?
     var trends = [Trend]()
     
     private let restClient = RESTClient(urlSession: URLSession.shared)
     private var repository = TrendRepository(restClient: RESTClient(urlSession: URLSession.shared))
+    private var authentication: Authentication?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        authentication = Authentication()
         loadTokenAndAddDataToView()
     }
     
     // MARK: Internal Functions
     
     private func loadTokenAndAddDataToView() {
-        restClient.getRequest(withRequest: getAuthenticationRequest()) { (data) in
-            self.bearerToken = self.getTokenFromData(data: data)
-            if self.bearerToken != "" {
-                self.loadTrends()
+        authentication!.getBearerToken() { (data) in
+            self.bearerToken = data
+            
+            if let token = self.bearerToken {
+                self.loadTrends(token: token)
             }
         }
     }
-    private func getTokenFromData(data: Data) -> String {
-        let json = try? JSONSerialization.jsonObject(with: data, options: [])
-        if let jsonDict = json as? [String : Any] {
-            return jsonDict["access_token"] as? String ?? ""
-        }
-        return ""
-    }
     
-    private func loadTrends() {
-        self.repository.getTrends(bearerToken: self.bearerToken, completion: { (data) in
+    private func loadTrends(token: String) {
+        self.repository.getTrends(bearerToken: token) { (data) in
             self.trends = data
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
-        })
-    }
-    
-    private func getAuthenticationRequest() -> URLRequest {
-        let loginString = String(format: "%@:%@", twitterConsumerKey, twitterSecretKey)
-        let loginData = loginString.data(using: String.Encoding.utf8)!
-        let base64LoginString = loginData.base64EncodedString()
-        
-        let path = "oauth2/token"
-        let params = "grant_type=client_credentials"
-        let url = Utilities.getURL(path: path, params: params)
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
-        request.setValue("application/x-www-form-urlencoded;charset=UTF-8", forHTTPHeaderField: "Content-Type")
-        request.setValue("29", forHTTPHeaderField: "Content-Length")
-        request.setValue("gzip", forHTTPHeaderField: "Accept-Encoding")
-        return request
+        }
     }
     
     // MARK: Table View Functions

@@ -14,6 +14,7 @@
 		CC03F5312045947D0048B716 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC03F5302045947D0048B716 /* Assets.xcassets */; };
 		CC03F5342045947D0048B716 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC03F5322045947D0048B716 /* LaunchScreen.storyboard */; };
 		CC3405AC204991E700F2B07A /* RESTClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3405AB204991E700F2B07A /* RESTClient.swift */; };
+		CC4134D22087393C00899E2D /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4134D12087393C00899E2D /* Authentication.swift */; };
 		CC4533AF2052A47900C80C85 /* Trend.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4533AE2052A47900C80C85 /* Trend.swift */; };
 		CC4533B12052A7A200C80C85 /* TrendRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4533B02052A7A200C80C85 /* TrendRepository.swift */; };
 		CC98F0A8207507CE00B52ACE /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC98F0A7207507CE00B52ACE /* Utilities.swift */; };
@@ -31,6 +32,7 @@
 		CC03F5332045947D0048B716 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CC03F5352045947D0048B716 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CC3405AB204991E700F2B07A /* RESTClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RESTClient.swift; sourceTree = "<group>"; };
+		CC4134D12087393C00899E2D /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		CC4533AE2052A47900C80C85 /* Trend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trend.swift; sourceTree = "<group>"; };
 		CC4533B02052A7A200C80C85 /* TrendRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendRepository.swift; sourceTree = "<group>"; };
 		CC98F0A7207507CE00B52ACE /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				CC4533AE2052A47900C80C85 /* Trend.swift */,
 				CC4533B02052A7A200C80C85 /* TrendRepository.swift */,
 				CC98F0A7207507CE00B52ACE /* Utilities.swift */,
+				CC4134D12087393C00899E2D /* Authentication.swift */,
 			);
 			path = TwitterTrends;
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC4134D22087393C00899E2D /* Authentication.swift in Sources */,
 				CC98F0A8207507CE00B52ACE /* Utilities.swift in Sources */,
 				CC03F52C2045947D0048B716 /* ViewController.swift in Sources */,
 				CC4533AF2052A47900C80C85 /* Trend.swift in Sources */,

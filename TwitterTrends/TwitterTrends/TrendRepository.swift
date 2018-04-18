@@ -44,6 +44,7 @@ class TrendRepository {
                 }
             }
         }
+        
         return newTrends
     }
     

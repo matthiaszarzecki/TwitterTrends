@@ -45,10 +45,7 @@ class Authentication {
     }
     
     static private func getAuthenticationRequest() -> URLRequest {
-        let loginString = String(format: "%@:%@", Constants.twitterConsumerKey, Constants.twitterSecretKey)
-        let loginData = loginString.data(using: String.Encoding.utf8)!
-        let base64LoginString = loginData.base64EncodedString()
-        
+        let base64LoginString = getEncodedLoginString(consumerKey: Constants.twitterConsumerKey, secretKey: Constants.twitterSecretKey)
         let path = "oauth2/token"
         let params = "grant_type=client_credentials"
         let url = Utilities.getURL(path: path, params: params)
@@ -59,5 +56,12 @@ class Authentication {
         request.setValue("29", forHTTPHeaderField: "Content-Length")
         request.setValue("gzip", forHTTPHeaderField: "Accept-Encoding")
         return request
+    }
+    
+    static private func getEncodedLoginString(consumerKey: String, secretKey: String) -> String {
+        let loginString = String(format: "%@:%@", consumerKey, secretKey)
+        let loginData = loginString.data(using: String.Encoding.utf8)!
+        let base64LoginString = loginData.base64EncodedString()
+        return base64LoginString
     }
 }

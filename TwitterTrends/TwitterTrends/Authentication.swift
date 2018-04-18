@@ -45,13 +45,13 @@ class Authentication {
     }
     
     static private func getAuthenticationRequest() -> URLRequest {
-        let base64LoginString = getEncodedLoginString(consumerKey: Constants.twitterConsumerKey, secretKey: Constants.twitterSecretKey)
+        let encodedLoginString = getEncodedLoginString(consumerKey: Constants.twitterConsumerKey, secretKey: Constants.twitterSecretKey)
         let path = "oauth2/token"
         let params = "grant_type=client_credentials"
         let url = Utilities.getURL(path: path, params: params)
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
+        request.setValue("Basic \(encodedLoginString)", forHTTPHeaderField: "Authorization")
         request.setValue("application/x-www-form-urlencoded;charset=UTF-8", forHTTPHeaderField: "Content-Type")
         request.setValue("29", forHTTPHeaderField: "Content-Length")
         request.setValue("gzip", forHTTPHeaderField: "Accept-Encoding")

@@ -9,47 +9,43 @@
 import Foundation
 
 class Authentication {
-    
-    private let twitterConsumerKey = "IcGVWgJhPZxDhchayq9TtT7kh"
-    private let twitterSecretKey = "kQdHgDg6DowQRgt0Q3ocfZCBuSYT0gIkLq46fTFkomW9dNJBr7"
-    private var bearerToken: String?
-    
-    private let restClient = RESTClient(urlSession: URLSession.shared)
+    static private var bearerToken: String?
+    static private let restClient = RESTClient(urlSession: URLSession.shared)
     
     init() {
-        loadToken()
+        Authentication.loadToken() { (data) in
+        }
     }
     
-    public func getBearerToken(completion: @escaping (_ token: String?) -> Void) {
+    static public func getBearerToken(completion: @escaping (_ token: String?) -> Void) {
         if bearerToken != nil {
             completion(bearerToken)
-            return
-        }
-        
-        restClient.getRequest(withRequest: getAuthenticationRequest()) { (data) in
-            self.bearerToken = self.getTokenFromData(data: data)
-            if self.bearerToken != "" {
-                completion(self.bearerToken)
+        } else {
+            loadToken() { (data) in
+                completion(bearerToken)
             }
         }
     }
     
-    private func loadToken() {
+    static private func loadToken(completion: @escaping (_ token: String?) -> Void) {
         restClient.getRequest(withRequest: getAuthenticationRequest()) { (data) in
-            self.bearerToken = self.getTokenFromData(data: data)
+            bearerToken = getTokenFromData(data: data)
+            if bearerToken != nil {
+                completion(bearerToken)
+            }
         }
     }
     
-    private func getTokenFromData(data: Data) -> String {
+    static private func getTokenFromData(data: Data) -> String? {
         let json = try? JSONSerialization.jsonObject(with: data, options: [])
         if let jsonDict = json as? [String : Any] {
-            return jsonDict["access_token"] as? String ?? ""
+            return jsonDict["access_token"] as? String ?? nil
         }
-        return ""
+        return nil
     }
     
-    private func getAuthenticationRequest() -> URLRequest {
-        let loginString = String(format: "%@:%@", twitterConsumerKey, twitterSecretKey)
+    static private func getAuthenticationRequest() -> URLRequest {
+        let loginString = String(format: "%@:%@", Constants.twitterConsumerKey, Constants.twitterSecretKey)
         let loginData = loginString.data(using: String.Encoding.utf8)!
         let base64LoginString = loginData.base64EncodedString()
         

@@ -9,24 +9,22 @@
 import UIKit
 
 class ViewController: UITableViewController {
+    
     private var bearerToken: String?
     var trends = [Trend]()
     
     private let restClient = RESTClient(urlSession: URLSession.shared)
     private var repository = TrendRepository(restClient: RESTClient(urlSession: URLSession.shared))
-    private var authentication: Authentication?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        authentication = Authentication()
-        loadTokenAndAddDataToView()
+        loadTrendsAndAddDataToView()
     }
     
     // MARK: Internal Functions
     
-    private func loadTokenAndAddDataToView() {
-        authentication!.getBearerToken() { (data) in
+    private func loadTrendsAndAddDataToView() {
+        Authentication.getBearerToken() { (data) in
             self.bearerToken = data
             
             if let token = self.bearerToken {

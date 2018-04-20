@@ -10,15 +10,12 @@ import Foundation
 
 class Authentication {
     static private var bearerToken: String?
-    static private let restClient = RESTClient(urlSession: URLSession.shared)
+    static private let restClient = AppProvider.restClient
     
     init() {
         Authentication.loadToken() { (data) in
         }
-        
-        //init restclient via dependency injection
     }
-    
     static public func getBearerToken(completion: @escaping (_ token: String?) -> Void) {
         if bearerToken != nil {
             completion(bearerToken)

@@ -11,38 +11,21 @@ import UIKit
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate  {
     
     @IBOutlet weak var tableView: UITableView!
-    private var bearerToken: String?
-    var trends = [Trend]()
-    
-    private var repository = TrendRepository(restClient: AppProvider.restClient)
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.delegate = self
         tableView.dataSource = self
         
-        loadTrendsAndAddDataToView()
+        getTrends()
     }
     
     // MARK: Internal Functions
     
-    private func loadTrendsAndAddDataToView() {
-        Authentication.getBearerToken() { (data) in
-            self.bearerToken = data
-            
-            if let token = self.bearerToken {
-                self.loadTrends(token: token)
-            }
-        }
-    }
-    
-    private func loadTrends(token: String) {
-        self.repository.getTrends(bearerToken: token) { (data) in
-            self.trends = data
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
+    func getTrends() {
+        ViewProvider.viewModelTrends.getTrends() { data in
+            self.tableView.reloadData()
         }
     }
     
@@ -57,12 +40,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return trends.count
+        return ViewProvider.viewModelTrends.trends.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath)
-        cell.textLabel?.text = trends[indexPath.row].name
+        cell.textLabel?.text = ViewProvider.viewModelTrends.trends[indexPath.row].name
         return cell
     }
 }

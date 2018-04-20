@@ -19,6 +19,8 @@
 		CC4533AF2052A47900C80C85 /* Trend.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4533AE2052A47900C80C85 /* Trend.swift */; };
 		CC4533B12052A7A200C80C85 /* TrendRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4533B02052A7A200C80C85 /* TrendRepository.swift */; };
 		CC461E1B208A11040076B9B7 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC461E1A208A11040076B9B7 /* Utilities.swift */; };
+		CC461E21208A170B0076B9B7 /* ViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC461E20208A170B0076B9B7 /* ViewProvider.swift */; };
+		CC461E23208A178C0076B9B7 /* ViewModelTrends.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC461E22208A178C0076B9B7 /* ViewModelTrends.swift */; };
 		CC6FD0982088DC0E005C248A /* AppProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6FD0972088DC0E005C248A /* AppProvider.swift */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +41,8 @@
 		CC4533AE2052A47900C80C85 /* Trend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trend.swift; sourceTree = "<group>"; };
 		CC4533B02052A7A200C80C85 /* TrendRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendRepository.swift; sourceTree = "<group>"; };
 		CC461E1A208A11040076B9B7 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		CC461E20208A170B0076B9B7 /* ViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewProvider.swift; sourceTree = "<group>"; };
+		CC461E22208A178C0076B9B7 /* ViewModelTrends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelTrends.swift; sourceTree = "<group>"; };
 		CC6FD0972088DC0E005C248A /* AppProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -106,6 +110,8 @@
 			children = (
 				CC4134D32087491800899E2D /* Constants.swift */,
 				CC461E1A208A11040076B9B7 /* Utilities.swift */,
+				CC461E20208A170B0076B9B7 /* ViewProvider.swift */,
+				CC6FD0972088DC0E005C248A /* AppProvider.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -115,9 +121,9 @@
 			children = (
 				CC03F5292045947D0048B716 /* AppDelegate.swift */,
 				CC4134D12087393C00899E2D /* Authentication.swift */,
-				CC6FD0972088DC0E005C248A /* AppProvider.swift */,
 				CC3405AB204991E700F2B07A /* RESTClient.swift */,
 				CC03F52B2045947D0048B716 /* ViewController.swift */,
+				CC461E22208A178C0076B9B7 /* ViewModelTrends.swift */,
 			);
 			name = Controllers;
 			path = TwitterTrends/Controllers;
@@ -279,9 +285,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC461E23208A178C0076B9B7 /* ViewModelTrends.swift in Sources */,
 				CC4134D22087393C00899E2D /* Authentication.swift in Sources */,
 				CC03F52C2045947D0048B716 /* ViewController.swift in Sources */,
 				CC4533AF2052A47900C80C85 /* Trend.swift in Sources */,
+				CC461E21208A170B0076B9B7 /* ViewProvider.swift in Sources */,
 				CC4533B12052A7A200C80C85 /* TrendRepository.swift in Sources */,
 				CC3405AC204991E700F2B07A /* RESTClient.swift in Sources */,
 				CC03F52A2045947D0048B716 /* AppDelegate.swift in Sources */,

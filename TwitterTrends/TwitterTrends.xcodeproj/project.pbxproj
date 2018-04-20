@@ -18,8 +18,8 @@
 		CC4134D42087491800899E2D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4134D32087491800899E2D /* Constants.swift */; };
 		CC4533AF2052A47900C80C85 /* Trend.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4533AE2052A47900C80C85 /* Trend.swift */; };
 		CC4533B12052A7A200C80C85 /* TrendRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4533B02052A7A200C80C85 /* TrendRepository.swift */; };
+		CC461E1B208A11040076B9B7 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC461E1A208A11040076B9B7 /* Utilities.swift */; };
 		CC6FD0982088DC0E005C248A /* AppProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6FD0972088DC0E005C248A /* AppProvider.swift */; };
-		CC98F0A8207507CE00B52ACE /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC98F0A7207507CE00B52ACE /* Utilities.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,8 +38,8 @@
 		CC4134D32087491800899E2D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CC4533AE2052A47900C80C85 /* Trend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trend.swift; sourceTree = "<group>"; };
 		CC4533B02052A7A200C80C85 /* TrendRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendRepository.swift; sourceTree = "<group>"; };
+		CC461E1A208A11040076B9B7 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		CC6FD0972088DC0E005C248A /* AppProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppProvider.swift; sourceTree = "<group>"; };
-		CC98F0A7207507CE00B52ACE /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,21 +92,62 @@
 		CC03F5282045947D0048B716 /* TwitterTrends */ = {
 			isa = PBXGroup;
 			children = (
-				CC03F5292045947D0048B716 /* AppDelegate.swift */,
-				CC03F52B2045947D0048B716 /* ViewController.swift */,
-				CC3405AB204991E700F2B07A /* RESTClient.swift */,
-				CC03F52D2045947D0048B716 /* Main.storyboard */,
-				CC03F5302045947D0048B716 /* Assets.xcassets */,
-				CC03F5322045947D0048B716 /* LaunchScreen.storyboard */,
-				CC03F5352045947D0048B716 /* Info.plist */,
-				CC4533AE2052A47900C80C85 /* Trend.swift */,
-				CC4533B02052A7A200C80C85 /* TrendRepository.swift */,
-				CC98F0A7207507CE00B52ACE /* Utilities.swift */,
-				CC4134D12087393C00899E2D /* Authentication.swift */,
-				CC4134D32087491800899E2D /* Constants.swift */,
-				CC6FD0972088DC0E005C248A /* AppProvider.swift */,
+				CC461E1F208A12D70076B9B7 /* Models */,
+				CC461E1E208A11E30076B9B7 /* Storyboards */,
+				CC461E1D208A11940076B9B7 /* SupportFiles */,
+				CC461E19208A11040076B9B7 /* Utilities */,
+				CC461E1C208A11450076B9B7 /* Controllers */,
 			);
 			path = TwitterTrends;
+			sourceTree = "<group>";
+		};
+		CC461E19208A11040076B9B7 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				CC4134D32087491800899E2D /* Constants.swift */,
+				CC461E1A208A11040076B9B7 /* Utilities.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		CC461E1C208A11450076B9B7 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				CC03F5292045947D0048B716 /* AppDelegate.swift */,
+				CC4134D12087393C00899E2D /* Authentication.swift */,
+				CC6FD0972088DC0E005C248A /* AppProvider.swift */,
+				CC3405AB204991E700F2B07A /* RESTClient.swift */,
+				CC03F52B2045947D0048B716 /* ViewController.swift */,
+			);
+			name = Controllers;
+			path = TwitterTrends/Controllers;
+			sourceTree = SOURCE_ROOT;
+		};
+		CC461E1D208A11940076B9B7 /* SupportFiles */ = {
+			isa = PBXGroup;
+			children = (
+				CC03F5302045947D0048B716 /* Assets.xcassets */,
+				CC03F5352045947D0048B716 /* Info.plist */,
+			);
+			path = SupportFiles;
+			sourceTree = "<group>";
+		};
+		CC461E1E208A11E30076B9B7 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				CC03F52D2045947D0048B716 /* Main.storyboard */,
+				CC03F5322045947D0048B716 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		CC461E1F208A12D70076B9B7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CC4533AE2052A47900C80C85 /* Trend.swift */,
+				CC4533B02052A7A200C80C85 /* TrendRepository.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -239,13 +280,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC4134D22087393C00899E2D /* Authentication.swift in Sources */,
-				CC98F0A8207507CE00B52ACE /* Utilities.swift in Sources */,
 				CC03F52C2045947D0048B716 /* ViewController.swift in Sources */,
 				CC4533AF2052A47900C80C85 /* Trend.swift in Sources */,
 				CC4533B12052A7A200C80C85 /* TrendRepository.swift in Sources */,
 				CC3405AC204991E700F2B07A /* RESTClient.swift in Sources */,
 				CC03F52A2045947D0048B716 /* AppDelegate.swift in Sources */,
 				CC4134D42087491800899E2D /* Constants.swift in Sources */,
+				CC461E1B208A11040076B9B7 /* Utilities.swift in Sources */,
 				CC6FD0982088DC0E005C248A /* AppProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -390,7 +431,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QDUTEX33CU;
-				INFOPLIST_FILE = TwitterTrends/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/TwitterTrends/SupportFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.matthiaszarzecki.TwitterTrends;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -406,7 +447,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QDUTEX33CU;
-				INFOPLIST_FILE = TwitterTrends/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/TwitterTrends/SupportFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.matthiaszarzecki.TwitterTrends;
 				PRODUCT_NAME = "$(TARGET_NAME)";

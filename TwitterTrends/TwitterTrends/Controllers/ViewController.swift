@@ -23,8 +23,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // MARK: Internal Functions
     
-    func getTrends() {
-        ViewProvider.viewModelTrends.getTrends() { data in
+    private func getTrends() {
+        ViewProvider.viewModelTrends.getTrends() { () in
             self.tableView.reloadData()
         }
     }

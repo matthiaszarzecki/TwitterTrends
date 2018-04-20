@@ -16,13 +16,13 @@ class ViewModelTrends {
         self.repository = repository
     }
     
-    public func getTrends(completion: @escaping ([Trend]) -> Void) {
+    public func getTrends(completion: @escaping () -> Void) {
         Authentication.getBearerToken() { (data) in
             if let token = data {
                 self.repository.getTrends(bearerToken: token) { (data) in
                     self.trends = data
                     DispatchQueue.main.async {
-                        completion(self.trends)
+                        completion()
                     }
                 }
             }

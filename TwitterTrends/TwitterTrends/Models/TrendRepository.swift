@@ -9,8 +9,8 @@
 import Foundation
 
 final class TrendRepository {
-    let restClient: RESTClient
-    var trends = [Trend]()
+    private let restClient: RESTClient
+    private var trends = [Trend]()
     
     init(restClient: RESTClient) {
         self.restClient = restClient

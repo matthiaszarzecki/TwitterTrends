@@ -8,8 +8,9 @@
 
 import UIKit
 
-class ViewController: UITableViewController {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate  {
     
+    @IBOutlet weak var tableView: UITableView!
     private var bearerToken: String?
     var trends = [Trend]()
     
@@ -18,6 +19,10 @@ class ViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        
         loadTrendsAndAddDataToView()
     }
     
@@ -44,19 +49,19 @@ class ViewController: UITableViewController {
     
     // MARK: Table View Functions
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return section == 0 ? "Berlin Trends" : "Section \(section)"
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return section == 0 ? "Berlin Trending" : "Section \(section)"
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return trends.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath)
         cell.textLabel?.text = trends[indexPath.row].name
         return cell

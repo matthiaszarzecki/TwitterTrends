@@ -10,7 +10,7 @@ import Foundation
 
 struct Utilities {
     
-    static let baseURL = "https://api.twitter.com/"
+    static private let baseURL = "https://api.twitter.com/"
     
     static func getURL(path: String, params: String) -> URL {
         let urlString = "\(baseURL)\(path)?\(params)"

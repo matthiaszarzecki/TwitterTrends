@@ -8,10 +8,9 @@
 
 import Foundation
 
-class TrendRepository {
+final class TrendRepository {
     let restClient: RESTClient
     var trends = [Trend]()
-    let baseURL = "https://api.twitter.com/"
     
     init(restClient: RESTClient) {
         self.restClient = restClient

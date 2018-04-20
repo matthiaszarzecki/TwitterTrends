@@ -18,6 +18,7 @@
 		CC4134D42087491800899E2D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4134D32087491800899E2D /* Constants.swift */; };
 		CC4533AF2052A47900C80C85 /* Trend.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4533AE2052A47900C80C85 /* Trend.swift */; };
 		CC4533B12052A7A200C80C85 /* TrendRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4533B02052A7A200C80C85 /* TrendRepository.swift */; };
+		CC6FD0982088DC0E005C248A /* AppProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6FD0972088DC0E005C248A /* AppProvider.swift */; };
 		CC98F0A8207507CE00B52ACE /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC98F0A7207507CE00B52ACE /* Utilities.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +38,7 @@
 		CC4134D32087491800899E2D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CC4533AE2052A47900C80C85 /* Trend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trend.swift; sourceTree = "<group>"; };
 		CC4533B02052A7A200C80C85 /* TrendRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendRepository.swift; sourceTree = "<group>"; };
+		CC6FD0972088DC0E005C248A /* AppProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppProvider.swift; sourceTree = "<group>"; };
 		CC98F0A7207507CE00B52ACE /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,6 +104,7 @@
 				CC98F0A7207507CE00B52ACE /* Utilities.swift */,
 				CC4134D12087393C00899E2D /* Authentication.swift */,
 				CC4134D32087491800899E2D /* Constants.swift */,
+				CC6FD0972088DC0E005C248A /* AppProvider.swift */,
 			);
 			path = TwitterTrends;
 			sourceTree = "<group>";
@@ -243,6 +246,7 @@
 				CC3405AC204991E700F2B07A /* RESTClient.swift in Sources */,
 				CC03F52A2045947D0048B716 /* AppDelegate.swift in Sources */,
 				CC4134D42087491800899E2D /* Constants.swift in Sources */,
+				CC6FD0982088DC0E005C248A /* AppProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

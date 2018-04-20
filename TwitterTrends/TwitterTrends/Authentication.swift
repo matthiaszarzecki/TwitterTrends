@@ -15,6 +15,8 @@ class Authentication {
     init() {
         Authentication.loadToken() { (data) in
         }
+        
+        //init restclient via dependency injection
     }
     
     static public func getBearerToken(completion: @escaping (_ token: String?) -> Void) {

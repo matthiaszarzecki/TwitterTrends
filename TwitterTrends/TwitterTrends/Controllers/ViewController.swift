@@ -46,6 +46,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath)
         cell.textLabel?.text = ViewProvider.viewModelTrends.trends[indexPath.row].name
+        let tweetVolume = ViewProvider.viewModelTrends.trends[indexPath.row].tweetVolume
+        cell.detailTextLabel?.text = tweetVolume != 0 ? "\(tweetVolume)" : ""
         return cell
     }
 }

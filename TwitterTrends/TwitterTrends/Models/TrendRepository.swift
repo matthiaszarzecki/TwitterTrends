@@ -24,27 +24,18 @@ final class TrendRepository {
     }
     
     private func getTrendsFromData(data: Data) -> [Trend] {
-        var newTrends = [Trend]()
-        
-        let json = try? JSONSerialization.jsonObject(with: data, options: [])
-        if let dataArray = json as? [Any] {
-            if let dataDictionary = dataArray[0] as? [String : Any] {
-                if let trends = dataDictionary["trends"] as? [Any] {
-                    for trend in trends {
-                        if let currentTrend = trend as? [String : Any] {
-                            let newTrend = Trend(name: currentTrend["name"] as? String ?? "",
-                                                 query: currentTrend["query"] as? String ?? "",
-                                                 tweetVolume: currentTrend["tweet_volume"] as? Int ?? 0,
-                                                 promotedContent: currentTrend["promoted_content"] as? Bool ?? false,
-                                                 url: currentTrend["url"] as? String ?? "")
-                            newTrends.append(newTrend)
-                        }
-                    }
-                }
-            }
+        let response = self.parseTrends(data: data)
+        return response!.trends!
+    }
+    
+    private func parseTrends(data: Data) -> TrendArray? {
+        var responseJson: [TrendArray]? = nil
+        do {
+            responseJson = try JSONDecoder().decode(TrendResponse.self, from: data)
+        } catch {
+            print(error)
         }
-        
-        return newTrends
+        return responseJson?.first
     }
     
     private func getTrendsRequest(bearerToken: String) -> URLRequest {

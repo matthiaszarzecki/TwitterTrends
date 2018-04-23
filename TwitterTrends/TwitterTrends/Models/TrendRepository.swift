@@ -18,24 +18,26 @@ final class TrendRepository {
     
     public func getTrends(bearerToken: String, completion: @escaping ([Trend]) -> Void) {
         restClient.getRequest(withRequest: getTrendsRequest(bearerToken: bearerToken)) { (data) in
-            self.trends = self.getTrendsFromData(data: data)
+            if let newTrends = self.getTrendsFromData(data: data) {
+                self.trends = newTrends
+            }
             completion(self.trends)
         }
     }
     
-    private func getTrendsFromData(data: Data) -> [Trend] {
-        let response = self.parseTrends(data: data)
-        return response!.trends!
+    private func getTrendsFromData(data: Data) -> [Trend]? {
+        let response = self.getTrendArrayFromData(data: data)
+        return response?.trends
     }
     
-    private func parseTrends(data: Data) -> TrendArray? {
-        var responseJson: [TrendArray]? = nil
+    private func getTrendArrayFromData(data: Data) -> TrendArray? {
+        var response: [TrendArray]? = nil
         do {
-            responseJson = try JSONDecoder().decode(TrendResponse.self, from: data)
+            response = try JSONDecoder().decode(TrendResponse.self, from: data)
         } catch {
             print(error)
         }
-        return responseJson?.first
+        return response?.first
     }
     
     private func getTrendsRequest(bearerToken: String) -> URLRequest {

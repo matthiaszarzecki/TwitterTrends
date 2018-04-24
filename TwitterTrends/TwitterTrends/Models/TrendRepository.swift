@@ -16,14 +16,16 @@ final class TrendRepository {
         self.restClient = restClient
     }
     
-    public func getTrends(bearerToken: String, completion: @escaping ([Trend]) -> Void) {
+    public func getTrends(bearerToken: String, sorted: Bool = true, completion: @escaping ([Trend]) -> Void) {
         restClient.getRequest(withRequest: getTrendsRequest(bearerToken: bearerToken)) { (data) in
             if let newTrends = self.getTrendsFromData(data: data) {
                 self.trends = newTrends
             }
             
-            self.trends = self.sortTrendsByVolume(trends: self.trends)
-            
+            if sorted {
+                self.trends = self.sortTrendsByVolume(trends: self.trends)
+            }
+
             completion(self.trends)
         }
     }

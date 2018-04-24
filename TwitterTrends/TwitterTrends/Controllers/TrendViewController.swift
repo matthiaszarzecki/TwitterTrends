@@ -53,7 +53,7 @@ class TrendViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     private func getTweetVolumeDisplayString(forVolume volume: Int?) -> String {
         if volume != nil && volume != 0, let volumeInt = volume {
-            return String(volumeInt)
+            return "\(volumeInt) Tweets"
         }
         return ""
     }

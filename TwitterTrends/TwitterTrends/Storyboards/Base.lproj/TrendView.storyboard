@@ -25,7 +25,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kLT-3u-eCk">
                                 <rect key="frame" x="0.0" y="40" width="375" height="627"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UKN-b6-Zv7">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UKN-b6-Zv7">
                                         <rect key="frame" x="0.0" y="0.0" width="367" height="619"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
@@ -74,7 +74,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="tableView" destination="UKN-b6-Zv7" id="Ut1-Pg-Qd5"/>
+                        <outlet property="tableView" destination="UKN-b6-Zv7" id="R9C-Qd-2Do"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H8f-vh-CZn" userLabel="First Responder" sceneMemberID="firstResponder"/>

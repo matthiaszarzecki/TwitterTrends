@@ -10,7 +10,7 @@
 		6CC789D340E013C3FA8763C3 /* Pods_TwitterTrends.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1487FE81D5C50A4EFEDD5406 /* Pods_TwitterTrends.framework */; };
 		CC03F52A2045947D0048B716 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC03F5292045947D0048B716 /* AppDelegate.swift */; };
 		CC03F52C2045947D0048B716 /* TrendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC03F52B2045947D0048B716 /* TrendViewController.swift */; };
-		CC03F52F2045947D0048B716 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC03F52D2045947D0048B716 /* Main.storyboard */; };
+		CC03F52F2045947D0048B716 /* TrendView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC03F52D2045947D0048B716 /* TrendView.storyboard */; };
 		CC03F5312045947D0048B716 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC03F5302045947D0048B716 /* Assets.xcassets */; };
 		CC03F5342045947D0048B716 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC03F5322045947D0048B716 /* LaunchScreen.storyboard */; };
 		CC3405AC204991E700F2B07A /* RESTClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3405AB204991E700F2B07A /* RESTClient.swift */; };
@@ -31,7 +31,7 @@
 		CC03F5262045947D0048B716 /* TwitterTrends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwitterTrends.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC03F5292045947D0048B716 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CC03F52B2045947D0048B716 /* TrendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendViewController.swift; sourceTree = "<group>"; };
-		CC03F52E2045947D0048B716 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CC03F52E2045947D0048B716 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TrendView.storyboard; sourceTree = "<group>"; };
 		CC03F5302045947D0048B716 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CC03F5332045947D0048B716 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CC03F5352045947D0048B716 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -141,7 +141,7 @@
 		CC461E1E208A11E30076B9B7 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				CC03F52D2045947D0048B716 /* Main.storyboard */,
+				CC03F52D2045947D0048B716 /* TrendView.storyboard */,
 				CC03F5322045947D0048B716 /* LaunchScreen.storyboard */,
 			);
 			path = Storyboards;
@@ -220,7 +220,7 @@
 			files = (
 				CC03F5342045947D0048B716 /* LaunchScreen.storyboard in Resources */,
 				CC03F5312045947D0048B716 /* Assets.xcassets in Resources */,
-				CC03F52F2045947D0048B716 /* Main.storyboard in Resources */,
+				CC03F52F2045947D0048B716 /* TrendView.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,12 +302,12 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		CC03F52D2045947D0048B716 /* Main.storyboard */ = {
+		CC03F52D2045947D0048B716 /* TrendView.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				CC03F52E2045947D0048B716 /* Base */,
 			);
-			name = Main.storyboard;
+			name = TrendView.storyboard;
 			sourceTree = "<group>";
 		};
 		CC03F5322045947D0048B716 /* LaunchScreen.storyboard */ = {

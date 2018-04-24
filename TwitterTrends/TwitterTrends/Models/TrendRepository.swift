@@ -42,7 +42,7 @@ final class TrendRepository {
     
     private func getTrendsRequest(bearerToken: String) -> URLRequest {
         let path = "1.1/trends/place.json"
-        let params = "id=638242"
+        let params = "id=\(Constants.woeIDBerlin)"
         let url = Utilities.getURL(path: path, params: params)
         var request = URLRequest(url: url)
         request.httpMethod = "GET"

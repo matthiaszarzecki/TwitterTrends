@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import SafariServices
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate  {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SFSafariViewControllerDelegate  {
     
     @IBOutlet weak var tableView: UITableView!
 
@@ -46,8 +47,26 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath)
         cell.textLabel?.text = ViewProvider.viewModelTrends.trends[indexPath.row].name
-        let tweetVolume = ViewProvider.viewModelTrends.trends[indexPath.row].tweetVolume
-        cell.detailTextLabel?.text = tweetVolume != 0 ? "\(tweetVolume)" : ""
+        cell.detailTextLabel?.text = getTweetVolumeDisplayString(forVolume: ViewProvider.viewModelTrends.trends[indexPath.row].tweetVolume)
         return cell
+    }
+    
+    private func getTweetVolumeDisplayString(forVolume volume: Int?) -> String {
+        if volume != nil && volume != 0, let volumeInt = volume {
+            return String(volumeInt)
+        }
+        return ""
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let url = URL(string: ViewProvider.viewModelTrends.trends[indexPath.row].url!) else { return }
+        let safariVC = SFSafariViewController(url: url)
+        safariVC.delegate = self
+        self.tableView.deselectRow(at: indexPath, animated: true)
+        present(safariVC, animated: true, completion: nil)
+    }
+    
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        controller.dismiss(animated: true, completion: nil)
     }
 }

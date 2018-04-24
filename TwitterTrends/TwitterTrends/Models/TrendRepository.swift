@@ -21,8 +21,15 @@ final class TrendRepository {
             if let newTrends = self.getTrendsFromData(data: data) {
                 self.trends = newTrends
             }
+            
+            self.trends = self.sortTrendsByVolume(trends: self.trends)
+            
             completion(self.trends)
         }
+    }
+    
+    private func sortTrendsByVolume(trends: [Trend]) -> [Trend] {
+        return trends.sorted(by: { $0.tweetVolume ?? 0 > $1.tweetVolume ?? 0 })
     }
     
     private func getTrendsFromData(data: Data) -> [Trend]? {

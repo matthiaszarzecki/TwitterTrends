@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Trend View Controller-->
         <scene sceneID="aWO-Er-kfY">
             <objects>
-                <viewController id="IgF-bT-sh6" customClass="ViewController" customModule="TwitterTrends" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="IgF-bT-sh6" customClass="TrendViewController" customModule="TwitterTrends" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0QS-ZV-miL"/>
                         <viewControllerLayoutGuide type="bottom" id="zcb-lS-2iT"/>

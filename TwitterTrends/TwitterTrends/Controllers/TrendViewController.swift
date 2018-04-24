@@ -9,7 +9,7 @@
 import UIKit
 import SafariServices
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SFSafariViewControllerDelegate  {
+class TrendViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SFSafariViewControllerDelegate  {
     
     @IBOutlet weak var tableView: UITableView!
 

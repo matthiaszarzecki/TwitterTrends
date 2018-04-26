@@ -59,7 +59,10 @@ class TrendViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let url = URL(string: ViewProvider.viewModelTrends.trends[indexPath.row].url!) else { return }
+        guard let url = URL(string: ViewProvider.viewModelTrends.trends[indexPath.row].url!) else {
+            return
+        }
+        
         let safariVC = SFSafariViewController(url: url)
         safariVC.delegate = self
         self.tableView.deselectRow(at: indexPath, animated: true)

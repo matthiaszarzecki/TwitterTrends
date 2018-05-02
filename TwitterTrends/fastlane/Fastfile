@@ -1,7 +1,7 @@
 
 lane :create_icons do
     appicon(
-        appicon_devices: [:iphone, :ipad],
+        appicon_devices: [:iphone, :ipad, :ios_marketing],
         appicon_image_file: 'TwitterTrends/SupportFiles/Assets.xcassets/AppIcon.appiconset/twitter_trends_icon.png',
         appicon_path: 'TwitterTrends/SupportFiles/Assets.xcassets'
     )

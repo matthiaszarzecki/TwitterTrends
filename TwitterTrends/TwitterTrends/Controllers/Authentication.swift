@@ -12,10 +12,8 @@ class Authentication {
     static private var bearerToken: String?
     static private let restClient = AppProvider.restClient
     
-    init() {
-        Authentication.loadToken() { (data) in
-        }
-    }
+    //MARK: - Public Advice Access Functions
+    
     static public func getBearerToken(completion: @escaping (_ token: String?) -> Void) {
         if bearerToken != nil {
             completion(bearerToken)
@@ -25,6 +23,8 @@ class Authentication {
             }
         }
     }
+    
+    //MARK: - Internal Functions
     
     static private func loadToken(completion: @escaping (_ token: String?) -> Void) {
         restClient.getRequest(withRequest: getAuthenticationRequest()) { (data) in

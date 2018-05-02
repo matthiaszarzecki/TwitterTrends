@@ -1,8 +1,8 @@
 
 lane :create_icons do
     appicon(
+        # 'appicon_image_file' defaults to "fastlane/metadata/app_icon.png" <- base 1024px icon saved there
         appicon_devices: [:iphone, :ipad, :ios_marketing],
-        appicon_image_file: 'TwitterTrends/SupportFiles/Assets.xcassets/AppIcon.appiconset/twitter_trends_icon.png',
         appicon_path: 'TwitterTrends/SupportFiles/Assets.xcassets'
     )
 end

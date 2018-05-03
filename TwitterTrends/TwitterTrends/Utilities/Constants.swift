@@ -11,4 +11,6 @@ struct Constants {
     static public let twitterSecretKey = "kQdHgDg6DowQRgt0Q3ocfZCBuSYT0gIkLq46fTFkomW9dNJBr7"
     static public let baseURL = "https://api.twitter.com/"
     static public let woeIDBerlin = 638242
+    
+    static public let keyBearerToken = "bearer_token"
 }

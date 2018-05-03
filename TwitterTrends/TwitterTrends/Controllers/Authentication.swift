@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftKeychainWrapper
 
 class Authentication {
     static private var bearerToken: String?
@@ -15,6 +16,10 @@ class Authentication {
     //MARK: - Public Advice Access Functions
     
     static public func getBearerToken(completion: @escaping (_ token: String?) -> Void) {
+        if let savedToken = KeychainWrapper.standard.string(forKey: Constants.keyBearerToken), savedToken != "" {
+            bearerToken = savedToken
+        }
+        
         if bearerToken != nil {
             completion(bearerToken)
         } else {
@@ -30,6 +35,7 @@ class Authentication {
         restClient.getRequest(withRequest: getAuthenticationRequest()) { (data) in
             bearerToken = getTokenFromData(data: data)
             if bearerToken != nil {
+                KeychainWrapper.standard.set(bearerToken!, forKey: Constants.keyBearerToken)
                 completion(bearerToken)
             }
         }

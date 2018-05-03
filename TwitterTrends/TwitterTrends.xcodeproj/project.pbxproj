@@ -22,6 +22,7 @@
 		CC461E21208A170B0076B9B7 /* ViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC461E20208A170B0076B9B7 /* ViewProvider.swift */; };
 		CC461E23208A178C0076B9B7 /* ViewModelTrends.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC461E22208A178C0076B9B7 /* ViewModelTrends.swift */; };
 		CC6FD0982088DC0E005C248A /* AppProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6FD0972088DC0E005C248A /* AppProvider.swift */; };
+		CC8504E6209B47E300415814 /* TrendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8504E5209B47E300415814 /* TrendView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		CC461E20208A170B0076B9B7 /* ViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewProvider.swift; sourceTree = "<group>"; };
 		CC461E22208A178C0076B9B7 /* ViewModelTrends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelTrends.swift; sourceTree = "<group>"; };
 		CC6FD0972088DC0E005C248A /* AppProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppProvider.swift; sourceTree = "<group>"; };
+		CC8504E5209B47E300415814 /* TrendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 				CC4134D12087393C00899E2D /* Authentication.swift */,
 				CC3405AB204991E700F2B07A /* RESTClient.swift */,
 				CC03F52B2045947D0048B716 /* TrendViewController.swift */,
+				CC8504E5209B47E300415814 /* TrendView.swift */,
 				CC461E22208A178C0076B9B7 /* ViewModelTrends.swift */,
 			);
 			name = Controllers;
@@ -279,6 +282,7 @@
 				CC03F52A2045947D0048B716 /* AppDelegate.swift in Sources */,
 				CC4134D42087491800899E2D /* Constants.swift in Sources */,
 				CC461E1B208A11040076B9B7 /* Utilities.swift in Sources */,
+				CC8504E6209B47E300415814 /* TrendView.swift in Sources */,
 				CC6FD0982088DC0E005C248A /* AppProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

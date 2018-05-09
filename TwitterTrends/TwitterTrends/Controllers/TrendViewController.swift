@@ -9,6 +9,7 @@
 import UIKit
 import Bond
 import SafariServices
+import Foundation
 
 class TrendViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SFSafariViewControllerDelegate {
     
@@ -29,10 +30,7 @@ class TrendViewController: UIViewController, UITableViewDataSource, UITableViewD
     private func getTrends() {
         viewModelTrends.getTrends() { () in
             self.viewModelTrends.trends.bind(to: self.tableView, animated: true, createCell: { (trends, indexPath, tableView) -> UITableViewCell in
-                let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath)
-                cell.textLabel?.text = self.viewModelTrends.trends[indexPath.row].name
-                cell.detailTextLabel?.text = self.getTweetVolumeDisplayString(forVolume: self.viewModelTrends.trends[indexPath.row].tweetVolume)
-                return cell
+                return self.prepareCell(trends: ViewProvider.viewModelTrends.trends, tableView: tableView, indexPath: indexPath)
             })
         }
     }
@@ -44,7 +42,7 @@ class TrendViewController: UIViewController, UITableViewDataSource, UITableViewD
         return ""
     }
     
-    private func prepareCell(tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
+    private func prepareCell(trends: MutableObservableArray<Trend>, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath)
         cell.textLabel?.text = self.viewModelTrends.trends[indexPath.row].name
         cell.detailTextLabel?.text = self.getTweetVolumeDisplayString(forVolume: self.viewModelTrends.trends[indexPath.row].tweetVolume)
@@ -66,10 +64,7 @@ class TrendViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath)
-        cell.textLabel?.text = viewModelTrends.trends[indexPath.row].name
-        cell.detailTextLabel?.text = getTweetVolumeDisplayString(forVolume: viewModelTrends.trends[indexPath.row].tweetVolume)
-        return cell
+        return prepareCell(trends: viewModelTrends.trends, tableView: tableView, indexPath: indexPath)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

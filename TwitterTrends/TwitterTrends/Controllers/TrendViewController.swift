@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Bond
 import SafariServices
 
 class TrendViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SFSafariViewControllerDelegate {
@@ -27,8 +28,27 @@ class TrendViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     private func getTrends() {
         viewModelTrends.getTrends() { () in
-            self.tableView.reloadData()
+            self.viewModelTrends.trends.bind(to: self.tableView, animated: true, createCell: { (trends, indexPath, tableView) -> UITableViewCell in
+                let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath)
+                cell.textLabel?.text = self.viewModelTrends.trends[indexPath.row].name
+                cell.detailTextLabel?.text = self.getTweetVolumeDisplayString(forVolume: self.viewModelTrends.trends[indexPath.row].tweetVolume)
+                return cell
+            })
         }
+    }
+    
+    private func getTweetVolumeDisplayString(forVolume volume: Int?) -> String {
+        if volume != nil && volume != 0, let volumeInt = volume {
+            return "\(volumeInt) Tweets"
+        }
+        return ""
+    }
+    
+    private func prepareCell(tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath)
+        cell.textLabel?.text = self.viewModelTrends.trends[indexPath.row].name
+        cell.detailTextLabel?.text = self.getTweetVolumeDisplayString(forVolume: self.viewModelTrends.trends[indexPath.row].tweetVolume)
+        return cell
     }
     
     // MARK: - Table View Functions
@@ -50,13 +70,6 @@ class TrendViewController: UIViewController, UITableViewDataSource, UITableViewD
         cell.textLabel?.text = viewModelTrends.trends[indexPath.row].name
         cell.detailTextLabel?.text = getTweetVolumeDisplayString(forVolume: viewModelTrends.trends[indexPath.row].tweetVolume)
         return cell
-    }
-    
-    private func getTweetVolumeDisplayString(forVolume volume: Int?) -> String {
-        if volume != nil && volume != 0, let volumeInt = volume {
-            return "\(volumeInt) Tweets"
-        }
-        return ""
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

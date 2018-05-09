@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import Foundation
+import Bond
 
 class ViewModelTrends {
     private let repository: TrendRepository
-    public var trends = [Trend]()
+    public var trends = MutableObservableArray<Trend>()
     
     init(repository: TrendRepository) {
         self.repository = repository
@@ -20,7 +22,10 @@ class ViewModelTrends {
         Authentication.getBearerToken() { (data) in
             if let token = data {
                 self.repository.getTrends(bearerToken: token) { (data) in
-                    self.trends = data
+                    for item in data {
+                        self.trends.append(item)
+                    }
+
                     DispatchQueue.main.async {
                         completion()
                     }

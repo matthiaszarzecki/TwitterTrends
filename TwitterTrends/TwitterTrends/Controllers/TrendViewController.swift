@@ -46,6 +46,10 @@ class TrendViewController: UIViewController, UITableViewDataSource, UITableViewD
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath)
         cell.textLabel?.text = self.viewModelTrends.trends[indexPath.row].name
         cell.detailTextLabel?.text = self.getTweetVolumeDisplayString(forVolume: self.viewModelTrends.trends[indexPath.row].tweetVolume)
+        let promoted = self.viewModelTrends.trends[indexPath.row].promotedContent ?? false
+        if promoted {
+            cell.backgroundColor = UIColor.yellow
+        }
         return cell
     }
     

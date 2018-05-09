@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Bond
 import SafariServices
 
 class TrendView: UIViewController, UITableViewDataSource, UITableViewDelegate, SFSafariViewControllerDelegate {

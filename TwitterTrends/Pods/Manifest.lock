@@ -1,16 +1,28 @@
 PODS:
+  - Bond (6.8.3):
+    - Differ (~> 1.0)
+    - ReactiveKit (~> 3.9)
+  - Differ (1.2.3)
+  - ReactiveKit (3.9.5)
   - SwiftKeychainWrapper (3.0.1)
 
 DEPENDENCIES:
-  - SwiftKeychainWrapper
+  - Bond
+  - SwiftKeychainWrapper (~> 3.0.1)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
+    - Bond
+    - Differ
+    - ReactiveKit
     - SwiftKeychainWrapper
 
 SPEC CHECKSUMS:
+  Bond: d6d25c0cb90459b9d27197251405c6db254da4cf
+  Differ: 061f3298ea9408494c43b530c44583e555884daf
+  ReactiveKit: 5dcd9e2f32227e6a02e7ca649f52b63f68e6421d
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
 
-PODFILE CHECKSUM: 19ef51763df21982699b880f28c775c749956ea7
+PODFILE CHECKSUM: 1b5e4f54ffeb613a88cea99e9afdb3e22fab7f8b
 
 COCOAPODS: 1.5.0

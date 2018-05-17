@@ -48,7 +48,7 @@ class TrendViewController: UIViewController, UITableViewDataSource, UITableViewD
         cell.detailTextLabel?.text = self.getTweetVolumeDisplayString(forVolume: self.viewModelTrends.trends[indexPath.row].tweetVolume)
         let promoted = self.viewModelTrends.trends[indexPath.row].promotedContent ?? false
         if promoted {
-            cell.backgroundColor = UIColor.yellow
+            cell.backgroundColor = UIColor.colorFromHexString(Constants.colorHexPromotedContentCell)
         }
         return cell
     }
@@ -69,6 +69,11 @@ class TrendViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return prepareCell(trends: viewModelTrends.trends, tableView: tableView, indexPath: indexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.textColor = UIColor.colorFromHexString(Constants.colorHexTwitterTrendsLightBlue)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

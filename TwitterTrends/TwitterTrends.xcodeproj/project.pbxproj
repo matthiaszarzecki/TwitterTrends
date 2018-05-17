@@ -14,6 +14,7 @@
 		CC03F5312045947D0048B716 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC03F5302045947D0048B716 /* Assets.xcassets */; };
 		CC03F5342045947D0048B716 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC03F5322045947D0048B716 /* LaunchScreen.storyboard */; };
 		CC3405AC204991E700F2B07A /* RESTClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3405AB204991E700F2B07A /* RESTClient.swift */; };
+		CC3A00D220ADBCA500E4AA53 /* UIColor-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3A00D120ADBCA500E4AA53 /* UIColor-Extension.swift */; };
 		CC4134D22087393C00899E2D /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4134D12087393C00899E2D /* Authentication.swift */; };
 		CC4134D42087491800899E2D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4134D32087491800899E2D /* Constants.swift */; };
 		CC4533AF2052A47900C80C85 /* Trend.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4533AE2052A47900C80C85 /* Trend.swift */; };
@@ -36,6 +37,7 @@
 		CC03F5332045947D0048B716 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CC03F5352045947D0048B716 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CC3405AB204991E700F2B07A /* RESTClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RESTClient.swift; sourceTree = "<group>"; };
+		CC3A00D120ADBCA500E4AA53 /* UIColor-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor-Extension.swift"; sourceTree = "<group>"; };
 		CC4134D12087393C00899E2D /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		CC4134D32087491800899E2D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CC4533AE2052A47900C80C85 /* Trend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trend.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				CC461E1A208A11040076B9B7 /* Utilities.swift */,
 				CC461E20208A170B0076B9B7 /* ViewProvider.swift */,
 				CC6FD0972088DC0E005C248A /* AppProvider.swift */,
+				CC3A00D120ADBCA500E4AA53 /* UIColor-Extension.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -276,6 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC461E23208A178C0076B9B7 /* ViewModelTrends.swift in Sources */,
+				CC3A00D220ADBCA500E4AA53 /* UIColor-Extension.swift in Sources */,
 				CC4134D22087393C00899E2D /* Authentication.swift in Sources */,
 				CC03F52C2045947D0048B716 /* TrendViewController.swift in Sources */,
 				CC4533AF2052A47900C80C85 /* Trend.swift in Sources */,

@@ -8,10 +8,9 @@
 
 import UIKit
 import Bond
-import SafariServices
 import Foundation
 
-class TrendViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SFSafariViewControllerDelegate {
+class TrendViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     let viewModelTrends = ViewProvider.viewModelTrends
@@ -42,7 +41,7 @@ class TrendViewController: UIViewController, UITableViewDataSource, UITableViewD
         return ""
     }
     
-    private func prepareCell(trends: MutableObservableArray<Trend>, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
+    internal func prepareCell(trends: MutableObservableArray<Trend>, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath)
         cell.textLabel?.text = self.viewModelTrends.trends[indexPath.row].name
         cell.detailTextLabel?.text = self.getTweetVolumeDisplayString(forVolume: self.viewModelTrends.trends[indexPath.row].tweetVolume)
@@ -51,43 +50,5 @@ class TrendViewController: UIViewController, UITableViewDataSource, UITableViewD
             cell.backgroundColor = UIColor.colorFromHexString(Constants.colorHexPromotedContentCell)
         }
         return cell
-    }
-    
-    // MARK: - Table View Functions
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return section == 0 ? "Berlin Trending" : "Section \(section)"
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModelTrends.trends.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return prepareCell(trends: viewModelTrends.trends, tableView: tableView, indexPath: indexPath)
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.textColor = UIColor.colorFromHexString(Constants.colorHexTwitterTrendsLightBlue)
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let url = URL(string: viewModelTrends.trends[indexPath.row].url!) else {
-            return
-        }
-        
-        let safariVC = SFSafariViewController(url: url)
-        safariVC.delegate = self
-        self.tableView.deselectRow(at: indexPath, animated: true)
-        present(safariVC, animated: true, completion: nil)
-    }
-    
-    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
-        controller.dismiss(animated: true, completion: nil)
     }
 }

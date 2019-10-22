@@ -9,7 +9,6 @@
 import UIKit
 
 struct RESTClient {
-    
     private let urlSession: URLSession
     
     init(urlSession: URLSession) {

@@ -9,7 +9,7 @@
 import UIKit
 import SafariServices
 
-extension TrendViewController: SFSafariViewControllerDelegate {
+extension TrendViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -41,7 +41,9 @@ extension TrendViewController: SFSafariViewControllerDelegate {
         self.tableView.deselectRow(at: indexPath, animated: true)
         present(safariVC, animated: true, completion: nil)
     }
-    
+}
+
+extension TrendViewController: SFSafariViewControllerDelegate {
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
         controller.dismiss(animated: true, completion: nil)
     }

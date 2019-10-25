@@ -10,7 +10,7 @@ import UIKit
 import Bond
 import Foundation
 
-class TrendViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class TrendViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     let viewModelTrends = ViewProvider.viewModelTrends

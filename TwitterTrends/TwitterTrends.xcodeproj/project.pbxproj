@@ -100,11 +100,12 @@
 		CC03F5282045947D0048B716 /* TwitterTrends */ = {
 			isa = PBXGroup;
 			children = (
+				CC461E1C208A11450076B9B7 /* Controllers */,
+				CC52918626273A7000411AF7 /* Extensions */,
 				CC461E1F208A12D70076B9B7 /* Models */,
 				CC461E1E208A11E30076B9B7 /* Storyboards */,
 				CC461E1D208A11940076B9B7 /* SupportFiles */,
 				CC461E19208A11040076B9B7 /* Utilities */,
-				CC461E1C208A11450076B9B7 /* Controllers */,
 			);
 			path = TwitterTrends;
 			sourceTree = "<group>";
@@ -112,11 +113,10 @@
 		CC461E19208A11040076B9B7 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				CC6FD0972088DC0E005C248A /* AppProvider.swift */,
 				CC4134D32087491800899E2D /* Constants.swift */,
 				CC461E1A208A11040076B9B7 /* Utilities.swift */,
 				CC461E20208A170B0076B9B7 /* ViewProvider.swift */,
-				CC6FD0972088DC0E005C248A /* AppProvider.swift */,
-				CC3A00D120ADBCA500E4AA53 /* UIColor-Extension.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -160,6 +160,14 @@
 				CC4533B02052A7A200C80C85 /* TrendRepository.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		CC52918626273A7000411AF7 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CC3A00D120ADBCA500E4AA53 /* UIColor-Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -238,7 +246,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-TwitterTrends/Pods-TwitterTrends-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-TwitterTrends/Pods-TwitterTrends-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Bond/Bond.framework",
 				"${BUILT_PRODUCTS_DIR}/Differ/Differ.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveKit/ReactiveKit.framework",
@@ -253,7 +261,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TwitterTrends/Pods-TwitterTrends-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TwitterTrends/Pods-TwitterTrends-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8EA5F55024D295555588A141 /* [CP] Check Pods Manifest.lock */ = {

@@ -9,8 +9,8 @@
 import Foundation
 
 struct Utilities {
-    static func getURL(path: String, params: String) -> URL {
-        let urlString = "\(Constants.baseURL)\(path)?\(params)"
-        return URL(string: urlString)!
-    }
+  static func getURL(path: String, params: String) -> URL {
+    let urlString = "\(Constants.baseURL)\(path)?\(params)"
+    return URL(string: urlString)!
+  }
 }

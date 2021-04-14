@@ -9,7 +9,7 @@
 import Foundation
 
 struct AppProvider {
-    static let restClient = RESTClient(urlSession: AppProvider.urlSession)
-    static let trendRepository = TrendRepository(restClient: AppProvider.restClient)
-    private static let urlSession = URLSession.shared
+  static let restClient = RESTClient(urlSession: AppProvider.urlSession)
+  static let trendRepository = TrendRepository(restClient: AppProvider.restClient)
+  private static let urlSession = URLSession.shared
 }

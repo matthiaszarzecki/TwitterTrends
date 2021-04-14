@@ -9,5 +9,5 @@
 import Foundation
 
 struct ViewProvider {
-    static public let viewModelTrends = ViewModelTrends(repository: AppProvider.trendRepository)
+  static public let viewModelTrends = ViewModelTrends(repository: AppProvider.trendRepository)
 }

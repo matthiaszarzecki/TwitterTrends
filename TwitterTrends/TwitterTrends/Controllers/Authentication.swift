@@ -10,63 +10,75 @@ import Foundation
 import SwiftKeychainWrapper
 
 class Authentication {
-    static private var bearerToken: String?
-    static private let restClient = AppProvider.restClient
-    
-    //MARK: - Public Advice Access Functions
-    
-    static public func getBearerToken(completion: @escaping (_ token: String?) -> Void) {
-        if let savedToken = KeychainWrapper.standard.string(forKey: Constants.keyBearerToken), savedToken != "" {
-            bearerToken = savedToken
-        }
-        
-        if bearerToken != nil {
-            completion(bearerToken)
-        } else {
-            loadToken() { (data) in
-                completion(bearerToken)
-            }
-        }
+  static private var bearerToken: String?
+  static private let restClient = AppProvider.restClient
+  
+  //MARK: - Public Advice Access Functions
+  
+  static public func getBearerToken(
+    completion: @escaping (_ token: String?) -> Void
+  ) {
+    if let savedToken = KeychainWrapper.standard.string(forKey: Constants.keyBearerToken), savedToken != "" {
+      bearerToken = savedToken
     }
     
-    //MARK: - Internal Functions
-    
-    static private func loadToken(completion: @escaping (_ token: String?) -> Void) {
-        restClient.getRequest(withRequest: getAuthenticationRequest()) { (data) in
-            bearerToken = getTokenFromData(data: data)
-            if bearerToken != nil {
-                KeychainWrapper.standard.set(bearerToken!, forKey: Constants.keyBearerToken)
-                completion(bearerToken)
-            }
-        }
+    if bearerToken != nil {
+      completion(bearerToken)
+    } else {
+      loadToken() { (data) in
+        completion(bearerToken)
+      }
     }
-    
-    static private func getTokenFromData(data: Data) -> String? {
-        let json = try? JSONSerialization.jsonObject(with: data, options: [])
-        if let jsonDict = json as? [String : Any] {
-            return jsonDict["access_token"] as? String ?? nil
-        }
-        return nil
+  }
+  
+  //MARK: - Internal Functions
+  
+  static private func loadToken(
+    completion: @escaping (_ token: String?) -> Void
+  ) {
+    restClient.getRequest(withRequest: getAuthenticationRequest()) { (data) in
+      bearerToken = getTokenFromData(data: data)
+      if bearerToken != nil {
+        KeychainWrapper.standard.set(bearerToken!, forKey: Constants.keyBearerToken)
+        completion(bearerToken)
+      }
     }
-    
-    static private func getAuthenticationRequest() -> URLRequest {
-        let encodedLoginString = getEncodedLoginString(consumerKey: Constants.twitterConsumerKey, secretKey: Constants.twitterSecretKey)
-        let path = "oauth2/token"
-        let params = "grant_type=client_credentials"
-        let url = Utilities.getURL(path: path, params: params)
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("Basic \(encodedLoginString)", forHTTPHeaderField: "Authorization")
-        request.setValue("application/x-www-form-urlencoded;charset=UTF-8", forHTTPHeaderField: "Content-Type")
-        request.setValue("29", forHTTPHeaderField: "Content-Length")
-        request.setValue("gzip", forHTTPHeaderField: "Accept-Encoding")
-        return request
+  }
+  
+  static private func getTokenFromData(data: Data) -> String? {
+    let json = try? JSONSerialization.jsonObject(with: data, options: [])
+    if let jsonDict = json as? [String : Any] {
+      return jsonDict["access_token"] as? String ?? nil
     }
+    return nil
+  }
+  
+  static private func getAuthenticationRequest() -> URLRequest {
+    let encodedLoginString = getEncodedLoginString(
+      consumerKey: Constants.twitterConsumerKey,
+      secretKey: Constants.twitterSecretKey
+    )
     
-    static private func getEncodedLoginString(consumerKey: String, secretKey: String) -> String {
-        let loginString = String(format: "%@:%@", consumerKey, secretKey)
-        let loginData = loginString.data(using: String.Encoding.utf8)!
-        let base64LoginString = loginData.base64EncodedString()
-        return base64LoginString
-    }
+    let path = "oauth2/token"
+    let params = "grant_type=client_credentials"
+    let url = Utilities.getURL(path: path, params: params)
+    var request = URLRequest(url: url)
+    
+    request.httpMethod = "POST"
+    request.setValue("Basic \(encodedLoginString)", forHTTPHeaderField: "Authorization")
+    request.setValue("application/x-www-form-urlencoded;charset=UTF-8", forHTTPHeaderField: "Content-Type")
+    request.setValue("29", forHTTPHeaderField: "Content-Length")
+    request.setValue("gzip", forHTTPHeaderField: "Accept-Encoding")
+    return request
+  }
+  
+  static private func getEncodedLoginString(
+    consumerKey: String,
+    secretKey: String
+  ) -> String {
+    let loginString = String(format: "%@:%@", consumerKey, secretKey)
+    let loginData = loginString.data(using: String.Encoding.utf8)!
+    let base64LoginString = loginData.base64EncodedString()
+    return base64LoginString
+  }
 }

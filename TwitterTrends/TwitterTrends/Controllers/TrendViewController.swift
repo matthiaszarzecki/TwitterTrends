@@ -11,44 +11,49 @@ import Bond
 import Foundation
 
 class TrendViewController: UIViewController {
+  @IBOutlet weak var tableView: UITableView!
+  let viewModelTrends = ViewProvider.viewModelTrends
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
     
-    @IBOutlet weak var tableView: UITableView!
-    let viewModelTrends = ViewProvider.viewModelTrends
+    tableView.delegate = self
+    tableView.dataSource = self
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        getTrends()
+    getTrends()
+  }
+  
+  // MARK: - Internal Functions
+  
+  private func getTrends() {
+    viewModelTrends.getTrends() { () in
+      self.viewModelTrends.trends.bind(to: self.tableView, animated: true, createCell: { (trends, indexPath, tableView) -> UITableViewCell in
+        return self.prepareCell(trends: ViewProvider.viewModelTrends.trends, tableView: tableView, indexPath: indexPath)
+      })
     }
-    
-    // MARK: - Internal Functions
-    
-    private func getTrends() {
-        viewModelTrends.getTrends() { () in
-            self.viewModelTrends.trends.bind(to: self.tableView, animated: true, createCell: { (trends, indexPath, tableView) -> UITableViewCell in
-                return self.prepareCell(trends: ViewProvider.viewModelTrends.trends, tableView: tableView, indexPath: indexPath)
-            })
-        }
+  }
+  
+  private func getTweetVolumeDisplayString(
+    forVolume volume: Int?
+  ) -> String {
+    if volume != nil && volume != 0, let volumeInt = volume {
+      return "\(volumeInt) Tweets"
     }
-    
-    private func getTweetVolumeDisplayString(forVolume volume: Int?) -> String {
-        if volume != nil && volume != 0, let volumeInt = volume {
-            return "\(volumeInt) Tweets"
-        }
-        return ""
+    return ""
+  }
+  
+  internal func prepareCell(
+    trends: MutableObservableArray<Trend>,
+    tableView: UITableView,
+    indexPath: IndexPath
+  ) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath)
+    cell.textLabel?.text = self.viewModelTrends.trends[indexPath.row].name
+    cell.detailTextLabel?.text = self.getTweetVolumeDisplayString(forVolume: self.viewModelTrends.trends[indexPath.row].tweetVolume)
+    let promoted = self.viewModelTrends.trends[indexPath.row].promotedContent ?? false
+    if promoted {
+      cell.backgroundColor = UIColor.colorFromHexString(Constants.colorHexPromotedContentCell)
     }
-    
-    internal func prepareCell(trends: MutableObservableArray<Trend>, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath)
-        cell.textLabel?.text = self.viewModelTrends.trends[indexPath.row].name
-        cell.detailTextLabel?.text = self.getTweetVolumeDisplayString(forVolume: self.viewModelTrends.trends[indexPath.row].tweetVolume)
-        let promoted = self.viewModelTrends.trends[indexPath.row].promotedContent ?? false
-        if promoted {
-            cell.backgroundColor = UIColor.colorFromHexString(Constants.colorHexPromotedContentCell)
-        }
-        return cell
-    }
+    return cell
+  }
 }
